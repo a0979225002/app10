@@ -24,8 +24,9 @@ public class MainActivity extends AppCompatActivity {
     }
     private void initWebView(){
         //需要給予知道我是個用戶端,擁有瀏覽器的特徵,點擊視窗不會跳出程式到手機瀏覽器內顯示網頁
-
         webView.setWebViewClient(new WebViewClient());
+
+
         WebSettings settings =  webView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setUseWideViewPort(true);
