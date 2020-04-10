@@ -19,6 +19,9 @@
     </style>
 </head>
 <body>
+<!--按下goto按鈕將會帶我們去其他地方-->
+<input type="button" value="goto" onclick="moveTo()"/>
+<hr>
 <div id="map"></div>
 <script>
       var map;
@@ -32,6 +35,13 @@
           zoom: 8
         });
       }
+      <!--        兩個參數個別是經度與緯度-->
+        function moveTo(newlat,newlng){
+        var newpos = {lat: newlat, lng: newlng};
+        map.setCenter(newpos);
+        map.setZoom(17);
+        var marker = new google.maps.Marker({position: newpos,map:map});
+        }
     </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDn1AwRWz2oQX_oOr5CobxB1PRe-Vg2eyA&callback=initMap"
         async defer></script>

@@ -11,7 +11,7 @@
         android:id="@+id/max"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="phone"
+
         />
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,15 +29,15 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="test1"
+            android:text="test2"
             android:onClick="test2"
             />
         <Button
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="test1"
-            android:onClick="test1"
+            android:text="test3"
+            android:onClick="test3"
             />
     </LinearLayout>
     <WebView
