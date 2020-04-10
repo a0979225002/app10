@@ -5,7 +5,7 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script>
-    function test1(max =10){
+    function test1(max){
         let n = parseInt(max);
         here.innerHTML = Math.floor(Math.random()*n+1);
     }
@@ -14,7 +14,15 @@
         alert("ok");
     }
 
+<!--    從android的java內呼叫此方法-->
+    function test3(){
+        lipin.callFromJS(urname.value);
+<!--        這裏的lipin是當初在後端設定的name-->
+<!--          webView.addJavascriptInterface(new MyJSobject(),"lipin");-->
+    }
+
 </script>
+
 
 <h1>lipin Big Company</h1>
 <hr>
@@ -27,6 +35,11 @@
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
     test2
+</button>
+<hr>
+<input type="text" id="urname"/>
+<button type="button" class="btn btn-danger" onclick="test3()">
+    test3
 </button>
 
 <!-- Modal -->

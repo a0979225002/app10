@@ -1,9 +1,14 @@
 package com.example.app_webview;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -34,6 +39,11 @@ public class MainActivity extends AppCompatActivity {
         settings.setBuiltInZoomControls(true);
         settings.setDisplayZoomControls(true);
 
+
+        //這裡的name:壞在前端以 lipin.callFromJS()的方式呼叫
+        //callFromJS()為MyJSobject()裡面寫的方法
+        webView.addJavascriptInterface(new MyJSobject(),"lipin");
+
         //直接把網站顯示在webview
 //      webView.loadUrl("https://www.iii.org.tw");
 
@@ -59,6 +69,32 @@ public class MainActivity extends AppCompatActivity {
 
         //呼叫html內的script:test1()功能
         webView.loadUrl(String.format("javascript:test1(%s)",strMax));
+    }
+    //定義在javascript呼叫的方法
+    //因為有些機種得不到傳遞的值,所以使用handler的方式取值
+    public class MyJSobject{
+        //需要註解這個@JavascriptInterface
+        @JavascriptInterface
+        public void callFromJS(String urname){
+            Log.v("brad","ok:"+urname);
+            Message message = new Message();//將Message對象發送給目標對象
+            Bundle data = new Bundle();//新增一個存放參數的Bundle
+            data.putString("urname",urname);//將參數存放到Bundle
+            message.setData(data);//將Bundle內的參數給予Message
+            uIhandler.sendMessage(message);//將有參數Message給予handler
+//            max.setText(urname);
+
+        }
+    }
+    private UIhandler uIhandler = new UIhandler();
+    private class UIhandler extends Handler{
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
+            String urname = msg.getData().getString("urname");
+            //把Message內的參數拿出來
+            max.setText(urname);
+        }
     }
 
 }
